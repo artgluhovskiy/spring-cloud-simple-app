@@ -1,0 +1,21 @@
+
+  # Common configuration ("local" active profile)
+server:
+  port: 8081
+
+logging:
+  level:
+    org.art.web:DEBUG
+
+spring:
+
+  # MySQL datasource configuration
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/catalog?allowPublicKeyRetrieval=true&useSSL=false&createDatabaseIfNotExist=true
+    username: root
+    password: root
+    initialization-mode: always
+  jpa:
+    hibernate:
+      ddl-auto: update

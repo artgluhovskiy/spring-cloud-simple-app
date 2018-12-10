@@ -1,0 +1,32 @@
+version: '3'
+
+services:
+
+  # MySQL database container
+  mysqldb:
+    image: mysql:5.7
+    container_name: mysqldb
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_USER: root
+      MYSQL_PASSWORD: root
+      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_DATABASE: catalog
+
+  # Catalog REST Service container
+  catalog-service:
+    container_name: catalog-service
+    build:
+      context: ./catalog-service
+    ports:
+      - "18081:8081"
+      - "18091:8091"
+    depends_on:
+      - mysqldb
+    environment:
+      DATABASE_HOST: mysqldb
+      DATABASE_USER: root
+      DATABASE_PASSWORD: root
+      DATABASE_NAME: catalog
+      DATABASE_PORT: 3306
