@@ -9,7 +9,7 @@ services:
     ports:
       - "3306:3306"
     environment:
-      MYSQL_USER: root
+      MYSQL_USER: user
       MYSQL_PASSWORD: root
       MYSQL_ROOT_PASSWORD: rootpassword
       MYSQL_DATABASE: catalog
@@ -26,7 +26,7 @@ services:
       - mysqldb
     environment:
       DATABASE_HOST: mysqldb
-      DATABASE_USER: root
+      DATABASE_USER: user
       DATABASE_PASSWORD: root
       DATABASE_NAME: catalog
       DATABASE_PORT: 3306
