@@ -1,6 +1,6 @@
 package org.art.web.micro.controllers;
 
-import org.art.web.micro.entities.Product;
+import org.art.web.micro.model.Product;
 import org.art.web.micro.exceptions.ProductNotFoundException;
 import org.art.web.micro.services.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;

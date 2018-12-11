@@ -1,4 +1,4 @@
-package org.art.web.micro.entities;
+package org.art.web.micro.model;
 
 import lombok.Data;
 

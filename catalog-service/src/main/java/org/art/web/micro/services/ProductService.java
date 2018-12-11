@@ -1,6 +1,6 @@
 package org.art.web.micro.services;
 
-import org.art.web.micro.entities.Product;
+import org.art.web.micro.model.Product;
 
 import java.util.List;
 import java.util.Optional;

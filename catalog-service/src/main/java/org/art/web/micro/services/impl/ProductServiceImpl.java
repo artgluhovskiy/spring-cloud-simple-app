@@ -1,6 +1,6 @@
 package org.art.web.micro.services.impl;
 
-import org.art.web.micro.entities.Product;
+import org.art.web.micro.model.Product;
 import org.art.web.micro.repositories.ProductRepository;
 import org.art.web.micro.services.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
