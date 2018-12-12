@@ -1,20 +1,10 @@
-  # Common configuration ("local" active profile)
+  # Common Config Server configuration
 server:
-  port: 8081
-
-logging:
-  level:
-    org.art.web:DEBUG
+  port: 8888
 
 spring:
-
-  # MySQL datasource configuration
-  datasource:
-    driver-class-name: com.mysql.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/catalog?allowPublicKeyRetrieval=true&useSSL=false&createDatabaseIfNotExist=true
-    username: root
-    password: root
-    initialization-mode: always
-  jpa:
-    hibernate:
-      ddl-auto: update
+  cloud:
+    config:
+      server:
+        git:
+          uri: https://github.com/artgluhovskiy/microservices-config-repo

@@ -1,0 +1,19 @@
+spring:
+  application:
+    name: inventory-service
+  cloud:
+    config:
+      uri: http://localhost:8888
+
+server:
+  port: 8082
+
+logging:
+  level:
+    org.art.web: DEBUG
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"

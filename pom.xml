@@ -12,6 +12,7 @@
     <description>Simple Spring Cloud Microservices</description>
 
     <modules>
+        <module>config-server</module>
         <module>catalog-service</module>
         <module>inventory-service</module>
     </modules>
