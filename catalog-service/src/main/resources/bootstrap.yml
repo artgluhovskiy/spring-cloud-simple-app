@@ -8,13 +8,13 @@ spring:
 server:
   port: 8081
 
-logging:
-  level:
-    org.art.web:DEBUG
-
 management:
   endpoints:
     web:
       exposure:
         include: "*"
+
+logging:
+  level:
+    ROOT: info
 

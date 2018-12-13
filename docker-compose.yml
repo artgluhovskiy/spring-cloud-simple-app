@@ -21,12 +21,6 @@ services:
       context: ./config-server
     ports:
       - "8888:8888"
-    environment:
-      DATABASE_HOST: mysqldb
-      DATABASE_USER: user
-      DATABASE_PASSWORD: root
-      DATABASE_NAME: catalog
-      DATABASE_PORT: 3306
 
   # Catalog REST Service container
   catalog-service:
@@ -40,5 +34,11 @@ services:
       - mysqldb
       - config-server
     environment:
+      DATABASE_HOST: mysqldb
+      DATABASE_PORT: 3306
+      DATABASE_USER: user
+      DATABASE_PASSWORD: root
+      DATABASE_NAME: catalog
+
       CONFIG_SERVER_HOST: config-server
       CONFIG_SERVER_PORT: 8888
