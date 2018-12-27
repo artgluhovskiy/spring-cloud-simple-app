@@ -2,70 +2,88 @@ version: '3'
 
 services:
 
-#  # MySQL database container
-#  mysqldb:
-#    image: mysql:5.7
-#    container_name: mysqldb
-#    ports:
-#      - "3306:3306"
-#    environment:
-#      MYSQL_USER: user
-#      MYSQL_PASSWORD: root
-#      MYSQL_ROOT_PASSWORD: rootpassword
-#      MYSQL_DATABASE: catalog
-#
-#  # Config Server container
-#  config-server:
-#    container_name: config-server
-#    build:
-#      context: ./config-server
-#    ports:
-#      - "8888:8888"
-#
-#  # Catalog REST Service container
-#  catalog-service:
-#    container_name: catalog-service
-#    build:
-#      context: ./catalog-service
-#    ports:
-#      - "18081:8081"
-#      - "18091:8091"
-#    depends_on:
-#      - mysqldb
-#      - config-server
-#    environment:
-#      DATABASE_HOST: mysqldb
-#      DATABASE_PORT: 3306
-#      DATABASE_USER: user
-#      DATABASE_PASSWORD: root
-#      DATABASE_NAME: catalog
-#
-#      CONFIG_SERVER_HOST: config-server
-#      CONFIG_SERVER_PORT: 8888
-
-  vault:
-    image: voxxit/vault
-    container_name: vault
-    cap_add:
-      - IPC_LOCK
-    environment:
-      VAULT_DEV_ROOT_TOKEN_ID: 934f9eae-31ff-a8ef-e1ca-4bea9e07aa09
+  # MySQL database container
+  mysqldb:
+    image: mysql:5.7
+    container_name: mysqldb
     ports:
-      - "8200:8200"
-
-  setup-vault:
-    image: voxxit/vault
-    container_name: setup-vault
-    entrypoint: /bin/sh
-    volumes:
-    - './config:/config'
+      - "3306:3306"
     environment:
-      VAULT_ADDR: 'http://vault:8200'
-      CONFIG_DIR: '/config'
-    command: >
-      -c "
-      sleep 2;
-      /config/vault-init.sh;
-      "
+      MYSQL_ROOT_PASSWORD: rootpassword
+
+  # Config Server container
+  config-server:
+    container_name: config-server
+    build:
+      context: ./config-server
+    ports:
+      - "8888:8888"
+
+  # Catalog REST Service container
+  catalog-service:
+    container_name: catalog-service
+    build:
+      context: ./catalog-service
+    ports:
+      - "18081:8081"
+      - "18091:8091"
     depends_on:
-    - vault
+      - mysqldb
+      - config-server
+    environment:
+      DATABASE_HOST: mysqldb
+      DATABASE_PORT: 3306
+      DATABASE_USER: root
+      DATABASE_PASSWORD: rootpassword
+      DATABASE_NAME: catalog
+
+      CONFIG_SERVER_HOST: config-server
+      CONFIG_SERVER_PORT: 8888
+
+  # Inventory REST Service container
+  inventory-service:
+    container_name: inventory-service
+    build:
+      context: ./inventory-service
+    ports:
+      - "18082:8082"
+      - "18092:8092"
+    depends_on:
+      - mysqldb
+      - config-server
+    environment:
+      DATABASE_HOST: mysqldb
+      DATABASE_PORT: 3306
+      DATABASE_USER: root
+      DATABASE_PASSWORD: rootpassword
+      DATABASE_NAME: inventory
+
+      CONFIG_SERVER_HOST: config-server
+      CONFIG_SERVER_PORT: 8888
+
+#  vault:
+#    image: voxxit/vault
+#    container_name: vault
+#    cap_add:
+#      - IPC_LOCK
+#    environment:
+#      VAULT_DEV_ROOT_TOKEN_ID: 934f9eae-31ff-a8ef-e1ca-4bea9e07aa09
+#    ports:
+#      - "8200:8200"
+#
+#  setup-vault:
+#    image: voxxit/vault
+#    container_name: setup-vault
+#    entrypoint: /bin/sh
+#    volumes:
+#    - './config:/config'
+#    environment:
+#      VAULT_ADDR: 'http://vault:8200'
+#      CONFIG_DIR: '/config'
+#    command: >
+#      -c "
+#      sleep 2;
+#      /config/vault-init.sh;
+#      "
+#    depends_on:
+#    - vault

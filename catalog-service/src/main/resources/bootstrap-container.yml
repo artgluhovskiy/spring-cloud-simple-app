@@ -1,0 +1,12 @@
+# 'Container' mode service configuration (with config server)
+spring:
+  application:
+    name: catalog-service
+  cloud:
+    config:
+      uri: http://${CONFIG_SERVER_HOST}:${CONFIG_SERVER_PORT}
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/

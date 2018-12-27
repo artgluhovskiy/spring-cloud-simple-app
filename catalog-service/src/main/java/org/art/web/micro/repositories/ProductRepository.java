@@ -1,6 +1,6 @@
 package org.art.web.micro.repositories;
 
-import org.art.web.micro.model.Product;
+import org.art.web.micro.entities.Product;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

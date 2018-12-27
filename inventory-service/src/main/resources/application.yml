@@ -1,0 +1,30 @@
+# 'Standalone' mode service configuration
+spring:
+  application:
+    name: inventory-service
+  datasource:
+    initialization-mode: always
+  jpa:
+    hibernate:
+      ddl-auto: update
+  h2:
+    console:
+      enabled: true
+
+server:
+  port: 8082
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+
+logging:
+  level:
+    ROOT: info
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
