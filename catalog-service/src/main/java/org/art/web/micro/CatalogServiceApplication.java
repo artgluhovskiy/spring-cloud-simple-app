@@ -1,6 +1,7 @@
 package org.art.web.micro;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -16,6 +17,12 @@ public class CatalogServiceApplication {
     @Autowired
     private DataSource dataSource;
 
+    @Value("${spring.application.name}")
+    private String appName;
+
+    @Value("${eureka.client.service-url.defaultZone}")
+    private String serviceRegistryDomain;
+
     public static void main(String[] args) {
         SpringApplication.run(CatalogServiceApplication.class, args);
     }
@@ -27,9 +34,12 @@ public class CatalogServiceApplication {
     }
 
     @Bean
-    public CommandLineRunner showLoadedBeans() {
+    public CommandLineRunner showAppInfo() {
         return (args) -> {
-            System.out.println(dataSource);
+            System.out.println("*** Application info ***");
+            System.out.println("Data source: " + dataSource);
+            System.out.println("App name: " + appName);
+            System.out.println("Service Registry domain: " + serviceRegistryDomain);
         };
     }
 }

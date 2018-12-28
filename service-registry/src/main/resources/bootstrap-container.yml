@@ -1,12 +1,11 @@
 # 'Container' mode service configuration (with config server)
 spring:
   application:
-    name: catalog-service
+    name: service-registry
   cloud:
     config:
       uri: http://${CONFIG_SERVER_HOST}:${CONFIG_SERVER_PORT}
 
 eureka:
-  client:
-    service-url:
-      defaultZone: http://${SERVICE_REGISTRY_HOST}:${SERVICE_REGISTRY_PORT}/eureka
+  server:
+    peer-node-read-timeout-ms: 1000

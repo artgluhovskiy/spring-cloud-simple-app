@@ -1,6 +1,7 @@
 package org.art.web.micro.inventory;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -14,14 +15,19 @@ public class InventoryServiceApplication {
     @Autowired
     private DataSource dataSource;
 
+    @Value("${eureka.client.service-url.defaultZone}")
+    private String serviceRegistryDomain;
+
     public static void main(String[] args) {
         SpringApplication.run(InventoryServiceApplication.class, args);
     }
 
     @Bean
-    public CommandLineRunner showDataSource() {
+    public CommandLineRunner showAppInfo() {
         return (args) -> {
-            System.out.println(dataSource);
+            System.out.println("*** Application info ***");
+            System.out.println("Data source: " + dataSource);
+            System.out.println("Service Registry domain: " + serviceRegistryDomain);
         };
     }
 }
