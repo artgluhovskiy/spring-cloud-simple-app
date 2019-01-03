@@ -20,7 +20,7 @@ public class ServiceRegistryApplication {
 
     @Bean
     public CommandLineRunner showAppInfo() {
-        return (args) -> {
+        return args -> {
             System.out.println("*** Application info ***");
             System.out.println("Service Registry domain: " + serviceHost);
         };

@@ -24,7 +24,7 @@ public class InventoryServiceApplication {
 
     @Bean
     public CommandLineRunner showAppInfo() {
-        return (args) -> {
+        return args -> {
             System.out.println("*** Application info ***");
             System.out.println("Data source: " + dataSource);
             System.out.println("Service Registry domain: " + serviceRegistryDomain);

@@ -5,12 +5,14 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cloud.client.circuitbreaker.EnableCircuitBreaker;
 import org.springframework.cloud.client.loadbalancer.LoadBalanced;
 import org.springframework.context.annotation.Bean;
 import org.springframework.web.client.RestTemplate;
 
 import javax.sql.DataSource;
 
+@EnableCircuitBreaker
 @SpringBootApplication
 public class CatalogServiceApplication {
 
@@ -35,7 +37,7 @@ public class CatalogServiceApplication {
 
     @Bean
     public CommandLineRunner showAppInfo() {
-        return (args) -> {
+        return args -> {
             System.out.println("*** Application info ***");
             System.out.println("Data source: " + dataSource);
             System.out.println("App name: " + appName);
